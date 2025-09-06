@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./pages/Navbar";
-import HomePage from "./pages/home";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
 import AboutUs from "./pages/About";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
         <header>
           <Navbar />
         </header>
-        <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 mt-[8ch]">
+        <main className="mt-[8ch]">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutUs />} />
