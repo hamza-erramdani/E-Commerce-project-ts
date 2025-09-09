@@ -1,89 +1,30 @@
 import ProductCard from "../components/ProductCard";
+import { useEffect, useState } from "react";
+import type { Product } from "../types/product";
+import { BASE_URL } from "../constants/baseURL";
 
 const HomePage = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${BASE_URL}/products`);
+      const data = await res.json();
+      setProducts(data);
+      } catch {
+        setError(true);
+      }
+      
+    };
+    fetchData();
+  }, []);
+  if(error) return <div className="bg-red-500 ">Something went wrong!</div>
   return (
     <div className="items-center grid lr:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-      <ProductCard
-        img={
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQd4zHUqs3hDuIGwiJGfC_k9Lc2WxNN2XrbA&s"
-        }
-        eyebrow="Asus rog strix"
-        title="ASUS GAMER ROG STRIX G17 G713IE-HX004W 17.3"
-        pricing="15 000 DH"
-        url="#"
-      />
-      <ProductCard
-        img={
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQd4zHUqs3hDuIGwiJGfC_k9Lc2WxNN2XrbA&s"
-        }
-        eyebrow="Asus rog strix"
-        title="ASUS GAMER ROG STRIX G17 G713IE-HX004W 17.3"
-        pricing="15,000 DH"
-        url="#"
-      />
-      <ProductCard
-        img={
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQd4zHUqs3hDuIGwiJGfC_k9Lc2WxNN2XrbA&s"
-        }
-        eyebrow="Asus rog strix"
-        title="ASUS GAMER ROG STRIX G17 G713IE-HX004W 17.3"
-        pricing="15 000 DH"
-        url="#"
-      />
-      <ProductCard
-        img={
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQd4zHUqs3hDuIGwiJGfC_k9Lc2WxNN2XrbA&s"
-        }
-        eyebrow="Asus rog strix"
-        title="ASUS GAMER ROG STRIX G17 G713IE-HX004W 17.3"
-        pricing="15 000 DH"
-        url="#"
-      />
-      <ProductCard
-        img={
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQd4zHUqs3hDuIGwiJGfC_k9Lc2WxNN2XrbA&s"
-        }
-        eyebrow="Asus rog strix"
-        title="ASUS GAMER ROG STRIX G17 G713IE-HX004W 17.3"
-        pricing="15 000 DH"
-        url="#"
-      />
-      <ProductCard
-        img={
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQd4zHUqs3hDuIGwiJGfC_k9Lc2WxNN2XrbA&s"
-        }
-        eyebrow="Asus rog strix"
-        title="ASUS GAMER ROG STRIX G17 G713IE-HX004W 17.3"
-        pricing="15 000 DH"
-        url="#"
-      />
-      <ProductCard
-        img={
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQd4zHUqs3hDuIGwiJGfC_k9Lc2WxNN2XrbA&s"
-        }
-        eyebrow="Asus rog strix"
-        title="ASUS GAMER ROG STRIX G17 G713IE-HX004W 17.3"
-        pricing="15 000 DH"
-        url="#"
-      />
-      <ProductCard
-        img={
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQd4zHUqs3hDuIGwiJGfC_k9Lc2WxNN2XrbA&s"
-        }
-        eyebrow="Asus rog strix"
-        title="ASUS GAMER ROG STRIX G17 G713IE-HX004W 17.3"
-        pricing="15 000 DH"
-        url="#"
-      />
-      <ProductCard
-        img={
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQd4zHUqs3hDuIGwiJGfC_k9Lc2WxNN2XrbA&s"
-        }
-        eyebrow="Asus rog strix"
-        title="ASUS GAMER ROG STRIX G17 G713IE-HX004W 17.3"
-        pricing="15 000 DH"
-        url="#"
-      />
+      {products.map((p) => (
+        <ProductCard {...p} />
+      ))}
     </div>
   );
 };
