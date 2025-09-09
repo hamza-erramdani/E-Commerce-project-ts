@@ -136,7 +136,12 @@ const Navbar = () => {
             <button className="w-fit px-6 py-2 rounded-lg text-base text-neutral-800 font-medium hover:bg-neutral-700 hover:text-neutral-50 active:bg-slate-900 bg-transparent transition-colors duration-200 cursor-pointer">
               Sign In
             </button>
-            <button className="w-fit px-6 py-2 rounded-lg text-base text-neutral-50 bg-neutral-800 hover:bg-neutral-700 active:bg-slate-900 transition-colors duration-200 cursor-pointer">
+            <button
+              className="w-fit px-6 py-2 rounded-lg text-base text-neutral-50 bg-neutral-800 hover:bg-neutral-700 active:bg-slate-900 transition-colors duration-200 cursor-pointer"
+              onClick={() => {
+                window.location.href = "/register";
+              }}
+            >
               Get Started
             </button>
           </div>

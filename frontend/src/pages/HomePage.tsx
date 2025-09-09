@@ -10,16 +10,15 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         const res = await fetch(`${BASE_URL}/products`);
-      const data = await res.json();
-      setProducts(data);
+        const data = await res.json();
+        setProducts(data);
       } catch {
         setError(true);
       }
-      
     };
     fetchData();
   }, []);
-  if(error) return <div className="bg-red-500 ">Something went wrong!</div>
+  if (error) return <div className="bg-red-500 ">Something went wrong!</div>;
   return (
     <div className="items-center grid lr:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
       {products.map((p) => (
