@@ -3,8 +3,14 @@ import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
+import { useAuth } from "../context/Auth/AuthContext";
 
 const Navbar = () => {
+
+  const  {username, token} = useAuth()
+
+  console.log("from Navbar", {username, token});
+  
   const [isOpen, setIsOpen] = useState(false);
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -152,3 +158,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
