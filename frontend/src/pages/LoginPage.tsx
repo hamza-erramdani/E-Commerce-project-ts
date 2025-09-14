@@ -3,11 +3,10 @@ import { BASE_URL } from "../constants/baseURL";
 import { useAuth } from "../context/Auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const RegisterPage = () => {
-  const navigate = useNavigate()
+const LoginPage = () => {
   const [error, setError] = useState("");
-  const firstNameRef = useRef<HTMLInputElement>(null);
-  const lastNameRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate()
+
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -15,26 +14,25 @@ const RegisterPage = () => {
 
   const OnSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    const firstName = firstNameRef.current?.value;
-    const lastName = lastNameRef.current?.value;
+
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
-    if (!firstName || !lastName || !email || !password) {
+    if (!email || !password) {
       setError("Please fill in all fields");
       return;
     }
 
-    const res = await fetch(`${BASE_URL}/user/register`, {
+    const res = await fetch(`${BASE_URL}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ firstName, lastName, email, password }),
+      body: JSON.stringify({ email, password }),
     });
     if (!res.ok) {
       setError(
-        "Unable to register user, please try again different credentials"
+        "Unable to login user, please try again different credentials"
       );
       return;
     }
@@ -51,40 +49,9 @@ const RegisterPage = () => {
     <div className="pt-5">
       <form className="max-w-sm mx-auto bg-blue-50 py-5 px-10 rounded-2xl">
         <div className="mb-5 text-center text-xl font-bold">
-          Registre new account
+          Login to your account
         </div>
-        <div className="mb-5">
-          <label
-            htmlFor="firstName"
-            className="block mb-2 text-sm font-medium text-gray-900"
-          >
-            first Name
-          </label>
-          <input
-            ref={firstNameRef}
-            type="name"
-            id="firstName"
-            className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            placeholder="first Name"
-            required
-          />
-        </div>
-        <div className="mb-5">
-          <label
-            htmlFor="lastName"
-            className="block mb-2 text-sm font-medium text-gray-900"
-          >
-            last Name
-          </label>
-          <input
-            ref={lastNameRef}
-            type="name"
-            id="lastName"
-            className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            placeholder="last Name"
-            required
-          />
-        </div>
+        
         <div className="mb-5">
           <label
             htmlFor="email"
@@ -122,11 +89,11 @@ const RegisterPage = () => {
           type="submit"
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
         >
-          Register new account
+          Login
         </button>
         {error && <div className="text-red-500 mt-2">{error}</div>}
       </form>
     </div>
   );
 };
-export default RegisterPage;
+export default LoginPage;

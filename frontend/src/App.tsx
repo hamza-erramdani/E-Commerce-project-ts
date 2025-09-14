@@ -4,10 +4,11 @@ import HomePage from "./pages/HomePage";
 import AboutUs from "./pages/About";
 import RegisterPage from "./pages/RegisterPage";
 import AuthProvider from "./context/Auth/AuthProvider";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
-    <AuthProvider >
+    <AuthProvider>
       <BrowserRouter>
         <header>
           <Navbar />
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
           </Routes>
         </main>
       </BrowserRouter>

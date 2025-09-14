@@ -6,11 +6,10 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useAuth } from "../context/Auth/AuthContext";
 
 const Navbar = () => {
+  const { username, isAuthenticated } = useAuth();
 
-  const  {username, token} = useAuth()
+  console.log("from Navbar", { username, isAuthenticated });
 
-  console.log("from Navbar", {username, token});
-  
   const [isOpen, setIsOpen] = useState(false);
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -138,19 +137,58 @@ const Navbar = () => {
           </ul>
 
           {/* Buttons */}
-          <div className="flex flex-col md:flex-row items-center gap-4">
-            <button className="w-fit px-6 py-2 rounded-lg text-base text-neutral-800 font-medium hover:bg-neutral-700 hover:text-neutral-50 active:bg-slate-900 bg-transparent transition-colors duration-200 cursor-pointer">
-              Sign In
-            </button>
-            <button
-              className="w-fit px-6 py-2 rounded-lg text-base text-neutral-50 bg-neutral-800 hover:bg-neutral-700 active:bg-slate-900 transition-colors duration-200 cursor-pointer"
-              onClick={() => {
-                window.location.href = "/register";
-              }}
-            >
-              Get Started
-            </button>
-          </div>
+          {isAuthenticated ? (
+            <div className="relative group inline-block">
+              <button className="rounded-full w-12 h-12 border border-sky-300 bg-sky-100 text-sky-300 font-bold text-2xl hover:bg-sky-400 hover:text-sky-800">
+                {(username || "U").toUpperCase().charAt(0)}
+              </button>
+              <ul className="absolute z-10 hidden w-48 rounded-md border border-sky-300 bg-sky-100 py-2 shadow-lg group-hover:block">
+                <li>
+                  <a
+                    href="my-profile"
+                    className="block px-4 py-2 text-gray-800 hover:bg-sky-50"
+                  >
+                    Profile
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-gray-800 hover:bg-sky-50"
+                  >
+                    Settings
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-gray-800 hover:bg-sky-50"
+                  >
+                    About
+                  </a>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div className="flex flex-col md:flex-row items-center gap-4">
+              <button
+                className="w-fit px-6 py-2 rounded-lg text-base text-neutral-800 font-medium hover:bg-neutral-700 hover:text-neutral-50 active:bg-slate-900 bg-transparent transition-colors duration-200 cursor-pointer"
+                onClick={() => {
+                  window.location.href = "/login";
+                }}
+              >
+                Sign In
+              </button>
+              <button
+                className="w-fit px-6 py-2 rounded-lg text-base text-neutral-50 bg-neutral-800 hover:bg-neutral-700 active:bg-slate-900 transition-colors duration-200 cursor-pointer"
+                onClick={() => {
+                  window.location.href = "/register";
+                }}
+              >
+                Get Started
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -158,5 +196,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
